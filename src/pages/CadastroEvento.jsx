@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Modal from "../components/Modal";   // ✅ importação correta
+import "../components/Modal.css";          // ✅ importação correta
 
 export default function CadastroEvento({ onAdd, onUpdate }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const evento = location.state?.evento; // dados vindos do botão Editar
+  const evento = location.state?.evento;
 
   const [titulo, setTitulo] = useState(evento?.titulo || "");
   const [data, setData] = useState(evento?.data || "");
   const [local, setLocal] = useState(evento?.local || "");
   const [descricao, setDescricao] = useState(evento?.descricao || "");
-  const [status, setStatus] = useState(evento?.status|| "");
+  const [status, setStatus] = useState(evento?.status || "");
+  const [showModal, setShowModal] = useState(false);
 
   const limparFormulario = (e) => {
     e.preventDefault();
@@ -24,20 +27,23 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!titulo || !data || !local || !descricao || !status ) {
+    if (!titulo || !data || !local || !descricao || !status) {
       alert("Preencha todos os campos.");
       return;
     }
 
     if (evento) {
-      // edição
       onUpdate(evento.id, { titulo, data, local, descricao, status });
     } else {
-      // novo cadastro
       onAdd({ titulo, data, local, descricao, status });
     }
 
-    navigate("/evento");
+    setShowModal(true); // abre o modal
+  };
+
+  const fecharModal = () => {
+    setShowModal(false);
+    navigate("/evento"); // redireciona após fechar
   };
 
   return (
@@ -82,7 +88,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
         </label>
 
         <label>
-       Status
+          Status
           <input
             value={status}
             onChange={(e) => setStatus(e.target.value)}
@@ -100,6 +106,13 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
           </button>
         </div>
       </form>
+
+      {/* Modal de confirmação */}
+      <Modal isOpen={showModal} onClose={fecharModal}>
+        <h3>✅ Evento salvo com sucesso!</h3>
+        <p>{titulo} - {data}- {local} - {status} </p>
+
+      </Modal>
     </section>
   );
 }
