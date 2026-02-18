@@ -1,6 +1,6 @@
 body { 
     margin: 0; 
-    font-family: Arial, sans-serif; background: #0b0f14; 
+    font-family: Arial, sans-serif; background: #212e3f; 
     color: #e6edf3; 
     }
     .app { 
@@ -36,7 +36,7 @@ body {
     border-radius: 10px; 
     text-decoration: none; 
     color: #cfe2ff; 
-    background: #111926; 
+    background:#094092; 
     }
     
     .link.active { 
@@ -115,18 +115,18 @@ body {
     padding: 10px 12px; 
     border-radius: 12px; 
     cursor: pointer; 
-    background: #1f6feb; 
+    background: #094092; 
     color: white; 
     }
     
     .btn.ghost { 
     background: transparent; 
-    border: 1px solid #1b2634; 
+    border: 1px solid #094092; 
     color: #cfe2ff; 
     }
     
     .btn.danger { 
-    background: #da3633; 
+    background: #212e3f; 
     }
     
     .footer {

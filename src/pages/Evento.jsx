@@ -45,7 +45,7 @@ export default function Evento({ eventos, onRemover, onRemoverTodos }) {
           style={{
             marginBottom: "1rem",
             padding: "0.6rem",
-            backgroundColor: "#d9534f",
+            backgroundColor: "#094092",
             color: "white",
             border: "none",
             cursor: "pointer",

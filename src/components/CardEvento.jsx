@@ -50,7 +50,7 @@ export default function CardEvento({ evento, onRemover }) {
             display: "inline-block",
             textDecoration: "none",
             padding: "0.4rem 0.8rem",
-            backgroundColor: "#0275d8",
+            backgroundColor: "#094092",
             color: "#fff",
             borderRadius: "4px",
             fontSize: "0.9rem",
@@ -67,7 +67,7 @@ export default function CardEvento({ evento, onRemover }) {
           onClick={handleEditar}
           style={{
             padding: "0.4rem 0.8rem",
-            backgroundColor: "#0275d8",
+            backgroundColor: "#094092",
             color: "#fff",
             border: "none",
             borderRadius: "4px",

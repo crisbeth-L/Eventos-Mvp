@@ -30,25 +30,22 @@ export default function App() {
     },
   ]);
 
-  // ➕ Adicionar novo evento
   function adicionarEvento(novo) {
     const eventoComId = { id: Date.now(), ...novo };
     setEventos((lista) => [eventoComId, ...lista]);
   }
 
-  // ✏️ Atualizar evento existente
   function atualizarEvento(id, dadosAtualizados) {
     setEventos((lista) =>
       lista.map((e) => e.id === id ? { ...e, ...dadosAtualizados } : e)
     );
   }
-
-  // ❌ Remover evento específico
+   
   function removerEvento(id) {
     setEventos((lista) => lista.filter((e) => e.id !== id));
   }
 
-  // ❌ Remover todos os eventos
+  
   function removerTodos() {
     setEventos([]);
   }
