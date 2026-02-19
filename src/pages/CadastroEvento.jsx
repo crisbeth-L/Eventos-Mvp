@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Modal from "../components/Modal";   // ✅ importação correta
-import "../components/Modal.css";          // ✅ importação correta
+import Modal from "../components/Modal";  
+import "../components/Modal.css";        
 
 export default function CadastroEvento({ onAdd, onUpdate }) {
   const navigate = useNavigate();
@@ -38,12 +38,12 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
       onAdd({ titulo, data, local, descricao, status });
     }
 
-    setShowModal(true); // abre o modal
+    setShowModal(true); 
   };
 
   const fecharModal = () => {
     setShowModal(false);
-    navigate("/evento"); // redireciona após fechar
+    navigate("/evento"); 
   };
 
   return (
@@ -109,7 +109,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
 
       {/* Modal de confirmação */}
       <Modal isOpen={showModal} onClose={fecharModal}>
-        <h3>✅ Evento salvo com sucesso!</h3>
+        <h3> Evento salvo com sucesso!!!!!</h3>
         <p>{titulo} - {data}- {local} - {status} </p>
 
       </Modal>

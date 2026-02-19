@@ -34,7 +34,7 @@ export default function Evento({ eventos, onRemover, onRemoverTodos }) {
         onChange={(e) => setBuscaLocal(e.target.value)}
         style={{ marginBottom: "1rem", padding: "0.5rem" }}
       />
-   {/* 🔥 Botão remover todos */}
+
       {eventos.length > 0 && (
         <button
           onClick={() => {

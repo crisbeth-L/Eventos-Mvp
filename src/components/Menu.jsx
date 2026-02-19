@@ -1,10 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-export default function Menu() {
+export default function Menu({ onLogout }) {
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    onLogout();       // muda estado em App
+    navigate("/");    // redireciona para login
+  };
+
   return (
     <nav className="menu">
-      <NavLink to="/" className={({ isActive }) => (isActive ? "link active" : "link")}>
+      <NavLink to="/home" className={({ isActive }) => (isActive ? "link active" : "link")}>
         Home
       </NavLink>
 
@@ -15,6 +22,11 @@ export default function Menu() {
       <NavLink to="/cadastrar" className={({ isActive }) => (isActive ? "link active" : "link")}>
         Cadastrar
       </NavLink>
+
+      {/* Botão de logout */}
+      <button onClick={handleLogoutClick} className="link">
+        Sair
+      </button>
     </nav>
   );
 }

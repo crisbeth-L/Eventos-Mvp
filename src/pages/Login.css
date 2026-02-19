@@ -5,27 +5,19 @@ body {
     justify-content: center;
     align-items: center;
     font-family: "Segoe UI", Arial, sans-serif;
-    background-color:  #1b2634; /* cor neutra de fundo */
+    background-color:  #1b2634; 
   }
   
-  /* Container principal com duas colunas */
+  
   .login-wrapper {
     display: flex;
     width: 900px;
     height: 500px;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 25px rgba(226, 225, 228, 0.25);
   }
-  
-  /* Lado da imagem */
-  .login-image {
-    flex: 1;
-    background-color: #094092;/* azul sólido */
-    background-size: cover;
-  }
-  
-  /* Lado do formulário */
+
   .login-container {
     flex: 1;
     display: flex;
@@ -38,7 +30,7 @@ body {
     animation: fadeIn 0.6s ease;
   }
   
-  /* Animação */
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -66,14 +58,14 @@ body {
   }
   
   .login-container input:focus {
-    border: 2px solid #1f3c88;
+    border: 2px solid #2d57c2;
     box-shadow: 0 0 8px rgba(31, 60, 136, 0.4);
   }
   
   .login-container button {
     margin-top: 10px;
     padding: 12px;
-    background-color: #1f3c88;
+    background-color: #375dbd;
     color: white;
     border: none;
     border-radius: 10px;

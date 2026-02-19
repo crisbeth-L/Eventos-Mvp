@@ -5,6 +5,7 @@ export default function Header() {
     <header className="header">
       <h1>Gerenciador de Eventos</h1>
       <p className="sub">React JSX + Rotas + Props + State</p>
+      |
     </header>
   );
 }

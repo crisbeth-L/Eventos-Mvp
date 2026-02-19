@@ -2,7 +2,7 @@ import React from "react";
 
 
 export default function Home({ total, eventos }) {
-  // pega o primeiro evento, se existir
+  // pega o primeiro evento, que esteja cadstrado
   const proximoEvento = eventos && eventos.length > 0 ? eventos[0] : null;
 
 
@@ -22,5 +22,8 @@ export default function Home({ total, eventos }) {
         </div>
       )}
     </section>
+
+
+
   );
 }

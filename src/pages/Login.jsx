@@ -10,7 +10,7 @@ function Login({ setLogado }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const emailsPermitidos = ["Crisbeth@gmail.com", "Catherine@gmail.com"];
+    const emailsPermitidos = ["Crisbeth@gmail.com"];
 
     if (emailsPermitidos.includes(email) && senha === "123456") {
       setLogado(true);
@@ -22,10 +22,8 @@ function Login({ setLogado }) {
 
   return (
     <div className="login-wrapper">
-      {/* Lado da imagem */}
-      <div className="login-image"></div>
+      
 
-      {/* Lado do formulário */}
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>

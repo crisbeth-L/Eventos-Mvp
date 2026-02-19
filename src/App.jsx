@@ -9,10 +9,13 @@ import Home from "./pages/Home";
 import Evento from "./pages/Evento";
 import CadastroEvento from "./pages/CadastroEvento";
 import DetalheEvento from "./pages/DetalheEvento";
-import Login from "./pages/Login"; // ✅ importando o Login
+import Login from "./pages/Login"; 
 
 export default function App() {
-  const [logado, setLogado] = useState(false); // estado de login
+  // Estado de login
+  const [logado, setLogado] = useState(false); 
+
+  // Lista de eventos
   const [eventos, setEventos] = useState([
     {
       id: 1,
@@ -32,6 +35,7 @@ export default function App() {
     },
   ]);
 
+  // Funções de manipulação de eventos
   function adicionarEvento(novo) {
     const eventoComId = { id: Date.now(), ...novo };
     setEventos((lista) => [eventoComId, ...lista]);
@@ -51,11 +55,16 @@ export default function App() {
     setEventos([]);
   }
 
+  // Função de logout
+  function handleLogout() {
+    setLogado(false);
+  }
+
   return (
     <div className="app">
       {/* Header e Menu só aparecem se estiver logado */}
       {logado && <Header />}
-      {logado && <Menu />}
+      {logado && <Menu onLogout={handleLogout} />}
 
       <main className="conteudo-principal">
         <Routes>

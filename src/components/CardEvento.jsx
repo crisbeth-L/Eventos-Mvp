@@ -8,7 +8,7 @@ export default function CardEvento({ evento, onRemover }) {
     navigate("/cadastrar", { state: { evento } });
   };
 
-  // Definir estilo da badge conforme status
+
   const badgeStyle = {
     padding: "0.2rem 0.6rem",
     borderRadius: "12px",

@@ -11,6 +11,7 @@ export default function DetalheEvento({ eventos }) {
   }
 
   return (
+    <div className="descricao" >
     <div>
       <h1>{evento.titulo}</h1>
       <p><strong>Data:</strong> {evento.data}</p>
@@ -19,6 +20,7 @@ export default function DetalheEvento({ eventos }) {
 
       <br />
       <Link to="/Evento">Voltar</Link>
+    </div>
     </div>
   );
 }
