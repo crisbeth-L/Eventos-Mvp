@@ -39,8 +39,24 @@ export default function CardEvento({ evento, onRemover }) {
           <span style={badgeStyle}>{evento.status}</span>
         </h3>
         <p className="muted">
-          {evento.data} • {evento.local}
+          {evento.data} • {evento.local} • {evento.capacidadeTotal}  • {evento.MapaUrl} 
         </p>
+        {evento.mapaUrl && (
+  <p>
+    <a
+      href={evento.mapaUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        color: "#fff",
+        textDecoration: "underline",
+        fontWeight: "bold"
+      }}
+    >
+      Ver localização no mapa
+    </a>
+  </p>
+)}
 
         <Link
           to={`/evento/${evento.id}`}

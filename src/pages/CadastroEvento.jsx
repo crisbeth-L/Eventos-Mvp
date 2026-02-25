@@ -15,6 +15,10 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
   const [status, setStatus] = useState(evento?.status || "");
   const [showModal, setShowModal] = useState(false);
 
+  // Novos campos corrigidos
+  const [capacidadeTotal, setCapacidadeTotal] = useState(evento?.capacidadeTotal || "");
+  const [mapaUrl, setMapaUrl] = useState(evento?.mapaUrl || "");
+
   const limparFormulario = (e) => {
     e.preventDefault();
     setTitulo("");
@@ -22,20 +26,34 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
     setLocal("");
     setDescricao("");
     setStatus("");
+    setCapacidadeTotal("");
+    setMapaUrl("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!titulo || !data || !local || !descricao || !status) {
+    // Validação
+    if (!titulo || !data || !local || !descricao || !status || !capacidadeTotal || !mapaUrl) {
       alert("Preencha todos os campos.");
       return;
     }
 
+    const novoEvento = {
+      titulo,
+      data,
+      local,
+      descricao,
+      status,
+      capacidadeTotal: Number(capacidadeTotal),
+      mapaUrl,
+      vagasRestantes: Number(capacidadeTotal), // inicializa igual à capacidade
+    };
+
     if (evento) {
-      onUpdate(evento.id, { titulo, data, local, descricao, status });
+      onUpdate(evento.id, novoEvento);
     } else {
-      onAdd({ titulo, data, local, descricao, status });
+      onAdd(novoEvento);
     }
 
     setShowModal(true); 
@@ -96,6 +114,26 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
           />
         </label>
 
+        <label>
+          Capacidade Total
+          <input
+            type="number"
+            value={capacidadeTotal}
+            onChange={(e) => setCapacidadeTotal(e.target.value)}
+            placeholder="Ex: 20 pessoas"
+          />
+        </label>
+
+        <label>
+          Mapa URL
+          <input
+            type="url"
+            value={mapaUrl}
+            onChange={(e) => setMapaUrl(e.target.value)}
+            placeholder="Ex:R. Frei Bruno, 201e - Parque Das Palmeiras"
+          />
+        </label>
+
         <div className="row">
           <button className="btn" type="submit">Salvar</button>
           <button className="btn" type="button" onClick={limparFormulario}>
@@ -107,11 +145,10 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
         </div>
       </form>
 
-      {/* Modal de confirmação */}
+      {/* Mensagem do Modal */}
       <Modal isOpen={showModal} onClose={fecharModal}>
-        <h3> Evento salvo com sucesso!!!!!</h3>
-        <p>{titulo} - {data}- {local} - {status} </p>
-
+        <h3>Evento salvo com sucesso!</h3>
+        <p>{titulo} - {data} - {local} - {status} - {capacidadeTotal} - {mapaUrl}</p>
       </Modal>
     </section>
   );

@@ -12,7 +12,7 @@ import DetalheEvento from "./pages/DetalheEvento";
 import Login from "./pages/Login"; 
 
 export default function App() {
-  // Estado de login
+
   const [logado, setLogado] = useState(false); 
 
   // Lista de eventos
@@ -62,7 +62,7 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Header e Menu só aparecem se estiver logado */}
+      {/* O Header e o Menu só  vai aparecer se estiver logado */}
       {logado && <Header />}
       {logado && <Menu onLogout={handleLogout} />}
 
@@ -83,7 +83,7 @@ export default function App() {
             }
           />
 
-          {/* Página de listagem */}
+        
           <Route
             path="/evento"
             element={
@@ -99,7 +99,6 @@ export default function App() {
             }
           />
 
-          {/* Rota de detalhe */}
           <Route
             path="/evento/:id"
             element={
@@ -107,7 +106,7 @@ export default function App() {
             }
           />
 
-          {/* Página de cadastro/edição */}
+          {/* Página de cadastro e edição */}
           <Route
             path="/cadastrar"
             element={
@@ -122,12 +121,11 @@ export default function App() {
             }
           />
 
-          {/* Redirecionamento padrão */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
-      {/* Footer só aparece se estiver logado */}
+      {/* Footer só  vai aparece se estiver logado */}
       {logado && <Footer />}
     </div>
   );
