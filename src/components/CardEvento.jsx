@@ -8,7 +8,6 @@ export default function CardEvento({ evento, onRemover }) {
     navigate("/cadastrar", { state: { evento } });
   };
 
-
   const badgeStyle = {
     padding: "0.2rem 0.6rem",
     borderRadius: "12px",
@@ -38,25 +37,42 @@ export default function CardEvento({ evento, onRemover }) {
           {evento.titulo}
           <span style={badgeStyle}>{evento.status}</span>
         </h3>
+
         <p className="muted">
-          {evento.data} • {evento.local} • {evento.capacidadeTotal}  • {evento.MapaUrl} 
+          {evento.data} • {evento.local} • {evento.capacidadeTotal} vagas
         </p>
+
+        {/* Exibir mapa como link */}
         {evento.mapaUrl && (
-  <p>
-    <a
-      href={evento.mapaUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        color: "#fff",
-        textDecoration: "underline",
-        fontWeight: "bold"
-      }}
-    >
-      Ver localização no mapa
-    </a>
-  </p>
-)}
+          <p>
+            <a
+              href={evento.mapaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#fff",
+                textDecoration: "underline",
+                fontWeight: "bold"
+              }}
+            >
+              Ver localização no mapa
+            </a>
+          </p>
+        )}
+
+        {/* Exibir fotos como imagens */}
+        {evento.fotos && evento.fotos.length > 0 && (
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px", flexWrap: "wrap" }}>
+            {evento.fotos.map((foto, idx) => (
+              <img
+                key={idx}
+                src={foto}
+                alt={`Foto ${idx + 1}`}
+                style={{ maxWidth: "120px", borderRadius: "5px" }}
+              />
+            ))}
+          </div>
+        )}
 
         <Link
           to={`/evento/${evento.id}`}

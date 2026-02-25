@@ -15,9 +15,10 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
   const [status, setStatus] = useState(evento?.status || "");
   const [showModal, setShowModal] = useState(false);
 
-  // Novos campos corrigidos
+  // Novos campos
   const [capacidadeTotal, setCapacidadeTotal] = useState(evento?.capacidadeTotal || "");
   const [mapaUrl, setMapaUrl] = useState(evento?.mapaUrl || "");
+  const [fotosTexto, setFotosTexto] = useState(evento?.fotos?.join("\n") || "");
 
   const limparFormulario = (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
     setStatus("");
     setCapacidadeTotal("");
     setMapaUrl("");
+    setFotosTexto("");
   };
 
   const handleSubmit = (e) => {
@@ -39,6 +41,12 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
       return;
     }
 
+    // Transformar fotosTexto em lista
+    const fotosLista = fotosTexto
+      .split("\n")
+      .map((linha) => linha.trim())
+      .filter((linha) => linha !== "");
+
     const novoEvento = {
       titulo,
       data,
@@ -47,6 +55,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
       status,
       capacidadeTotal: Number(capacidadeTotal),
       mapaUrl,
+      fotos: fotosLista,
       vagasRestantes: Number(capacidadeTotal), // inicializa igual à capacidade
     };
 
@@ -130,7 +139,16 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
             type="url"
             value={mapaUrl}
             onChange={(e) => setMapaUrl(e.target.value)}
-            placeholder="Ex:R. Frei Bruno, 201e - Parque Das Palmeiras"
+            placeholder="Ex: https://maps.google.com/..."
+          />
+        </label>
+
+        <label>
+          Fotos (uma URL por linha)
+          <textarea
+            value={fotosTexto}
+            onChange={(e) => setFotosTexto(e.target.value)}
+            placeholder="Cole aqui as URLs das fotos, uma por linha"
           />
         </label>
 
@@ -145,10 +163,38 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
         </div>
       </form>
 
-      {/* Mensagem do Modal */}
+      {/* Modal com mapa e fotos */}
       <Modal isOpen={showModal} onClose={fecharModal}>
         <h3>Evento salvo com sucesso!</h3>
-        <p>{titulo} - {data} - {local} - {status} - {capacidadeTotal} - {mapaUrl}</p>
+        <p>{titulo} - {data} - {local} - {status} - {capacidadeTotal} vagas</p>
+        
+        {/* Link clicável para o mapa */}
+        <p>
+          Mapa:{" "}
+          <a href={mapaUrl} target="_blank" rel="noopener noreferrer">
+            Abrir mapa
+          </a>
+        </p>
+
+        {/* Exibir fotos como miniaturas */}
+        {fotosTexto && (
+          <div>
+            <h4>Fotos:</h4>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              {fotosTexto.split("\n").map((foto, idx) => (
+                foto.trim() !== "" && (
+                  <a key={idx} href={foto} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={foto}
+                      alt={`Foto ${idx + 1}`}
+                      style={{ maxWidth: "120px", borderRadius: "5px" }}
+                    />
+                  </a>
+                )
+              ))}
+            </div>
+          </div>
+        )}
       </Modal>
     </section>
   );
