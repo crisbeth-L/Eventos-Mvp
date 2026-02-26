@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "../components/Modal";  
 import "../components/Modal.css";        
 
+
 export default function CadastroEvento({ onAdd, onUpdate }) {
   const navigate = useNavigate();
   const location = useLocation();
