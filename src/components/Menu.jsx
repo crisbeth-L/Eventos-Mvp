@@ -33,7 +33,7 @@ export default function Menu({ onLogout }) {
         <MdPersonAdd size={20} /> Cadastrar
       </NavLink>
 
-      {/* Botão de logout */}
+      
       <button onClick={handleLogoutClick} className="link">
         <MdLogout size={20} /> Sair
       </button>
