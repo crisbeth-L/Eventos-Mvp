@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "../components/Modal";  
 import "../components/Modal.css";        
 
-
 export default function CadastroEvento({ onAdd, onUpdate }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,6 +19,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
   const [capacidadeTotal, setCapacidadeTotal] = useState(evento?.capacidadeTotal || "");
   const [mapaUrl, setMapaUrl] = useState(evento?.mapaUrl || "");
   const [fotosTexto, setFotosTexto] = useState(evento?.fotos?.join("\n") || "");
+  const [vagasRestantes, setVagasRestantes] = useState(evento?.capacidadeTotal || 0);
 
   const limparFormulario = (e) => {
     e.preventDefault();
@@ -31,6 +31,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
     setCapacidadeTotal("");
     setMapaUrl("");
     setFotosTexto("");
+    setVagasRestantes(0);
   };
 
   const handleSubmit = (e) => {
