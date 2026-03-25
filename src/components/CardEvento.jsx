@@ -1,132 +1,42 @@
+
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+// ✅ (CORREÇÃO) Remova o import do Link porque não está sendo usado.
+// Isso evita o warning do ESLint: "'Link' is defined but never used"
+// import { Link } from "react-router-dom";
 
-export default function CardEvento({ evento, onRemover }) {
-  const navigate = useNavigate();
-
-  const handleEditar = () => {
-    navigate("/cadastrar", { state: { evento } });
-  };
-
-  const badgeStyle = {
-    padding: "0.2rem 0.6rem",
-    borderRadius: "12px",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#fff",
-    backgroundColor: evento.status === "Aberto" ? "#5cb85c" : "#d9534f",
-    marginLeft: "0.5rem"
-  };
+export default function CardEvento({ evento, onRemover, onEditar }) {
+  // ✅ Badge de status (aberto/lotado)
+  const temVagas = typeof evento.vagasRestantes === "number";
+  const lotado = temVagas && evento.vagasRestantes === 0;
 
   return (
-    <article
-      className="card"
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: "5px",
-        padding: "1rem",
-        marginBottom: "1rem",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "#0b0f14",
-      }}
-    >
+    <article className="card">
       <div>
-        <h3>
-          {evento.titulo}
-          <span style={badgeStyle}>{evento.status}</span>
-        </h3>
+        <h3>{evento.titulo}</h3>
 
+        {/* ✅ Badge aparece só se o evento tiver vagas configuradas */}
+        {temVagas && (
+          <span className={lotado ? "badge lotado" : "badge aberto"}>
+            {lotado ? "LOTADO" : "ABERTO"}
+          </span>
+        )}
+
+        {/* ✅ (CORREÇÃO) Não pode ter <p> dentro de <p>.
+            Troquei a estrutura: um <p> para data/local e outro para descrição (condicional). */}
         <p className="muted">
-          {evento.data} • {evento.local} • {evento.capacidadeTotal} vagas
+          {evento.data} • {evento.local}
         </p>
 
-        {/* Exibir mapa como link */}
-        {evento.mapaUrl && (
-          <p>
-            <a
-              href={evento.mapaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "#fff",
-                textDecoration: "underline",
-                fontWeight: "bold"
-              }}
-            >
-              Ver localização no mapa
-            </a>
-          </p>
+        {evento.descricao && (
+          <p className="descricao">{evento.descricao}</p>
         )}
-
-        {/* Exibir fotos como imagens */}
-        {evento.fotos && evento.fotos.length > 0 && (
-          <div style={{ display: "flex", gap: "10px", marginTop: "10px", flexWrap: "wrap" }}>
-            {evento.fotos.map((foto, idx) => (
-              <img
-                key={idx}
-                src={foto}
-                alt={`Foto ${idx + 1}`}
-                style={{ maxWidth: "120px", borderRadius: "5px" }}
-              />
-            ))}
-          </div>
-        )}
-
-        <Link
-          to={`/evento/${evento.id}`}
-          className="btn info"
-          style={{
-            marginTop: "0.5rem",
-            display: "inline-block",
-            textDecoration: "none",
-            padding: "0.4rem 0.8rem",
-            backgroundColor: "#094092",
-            color: "#fff",
-            borderRadius: "4px",
-            fontSize: "0.9rem",
-          }}
-        >
-          Ver Detalhes
-        </Link>
       </div>
 
-      <div style={{ display: "flex", gap: "0.5rem" }}>
-        <button
-          type="button"
-          className="btn warning"
-          onClick={handleEditar}
-          style={{
-            padding: "0.4rem 0.8rem",
-            backgroundColor: "#094092",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontSize: "0.9rem",
-          }}
-        >
-          Editar
-        </button>
-
-        <button
-          type="button"
-          className="btn danger"
-          onClick={() => onRemover(evento.id)}
-          style={{
-            padding: "0.4rem 0.8rem",
-            backgroundColor: "#d9534f",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontSize: "0.9rem",
-          }}
-        >
-          Remover
-        </button>
-      </div>
+      {/* ✅ Remover continua igual */}
+      <button className="btn danger" onClick={() => onRemover(evento.id)}>
+        Remover
+      </button>
     </article>
   );
 }
+ 
